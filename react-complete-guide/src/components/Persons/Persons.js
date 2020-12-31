@@ -15,6 +15,7 @@ const persons = props =>
         changed={event => {
           props.changed(event, person.id);
         }}
+        isAuth={props.isAuthenticated}
       />
     );
   });
