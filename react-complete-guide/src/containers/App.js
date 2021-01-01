@@ -5,6 +5,7 @@ import Persons from "../components/Persons/Persons";
 import Cockpit from "../components/Cockpit/Cockpit";
 import Aux from "../hoc/Aux";
 import withClass from "../hoc/withClass";
+import AuthContext from "../context/auth-context";
 
 class App extends Component {
   constructor(props) {
@@ -89,16 +90,22 @@ class App extends Component {
     }
 
     return (
-      <Aux classes={classes.App}>
-        <Cockpit
-          title={this.props.appTitle}
-          personsLength={this.state.persons.length}
-          showPersons={this.state.showPersons}
-          clicked={this.togglePersonsHandler}
-          login={this.loginHandler}
-        />
-        {persons}
-      </Aux>
+      <AuthContext.Provider
+        value={{
+          authenticated: this.state.authenticated,
+          login: this.loginHandler,
+        }}
+      >
+        <Aux classes={classes.App}>
+          <Cockpit
+            title={this.props.appTitle}
+            personsLength={this.state.persons.length}
+            showPersons={this.state.showPersons}
+            clicked={this.togglePersonsHandler}
+          />
+          {persons}
+        </Aux>
+      </AuthContext.Provider>
     );
   }
 }
