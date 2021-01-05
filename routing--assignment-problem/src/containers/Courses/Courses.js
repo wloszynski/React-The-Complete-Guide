@@ -24,12 +24,12 @@ class Courses extends Component {
         {this.state.courses.map((course) => {
           return (
             <Link
+              key={course.id}
               onClick={() => {
                 this.courseClickHandler(course.id);
               }}
               to={"/course/" + course.id}
               className="Course"
-              key={course.id}
             >
               {course.title}
             </Link>
